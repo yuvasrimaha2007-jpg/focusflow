@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FocusFlow — Smart Student Companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">✦</span><div><b>FocusFlow</b><small>Student OS</small></div></div>
+      <nav>
+        <button class="nav active" data-view="dashboard">⌂ <span>Dashboard</span></button>
+        <button class="nav" data-view="tasks">✓ <span>My Tasks</span></button>
+        <button class="nav" data-view="planner">◷ <span>AI Planner</span></button>
+        <button class="nav" data-view="analytics">◈ <span>Progress</span></button>
+      </nav>
+      <div class="sidebar-card">
+        <span class="spark">⚡</span>
+        <b>Today’s focus</b>
+        <p id="sideFocus">2 high-priority tasks</p>
+        <div class="mini-progress"><i id="sideProgress"></i></div>
+      </div>
+      <div class="profile"><div class="avatar">YS</div><div><b>Yuva</b><small>Computer Science</small></div></div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">SATURDAY · 27 SEPTEMBER 2026</p>
+          <h1 id="greeting">Good evening, Yuva 👋</h1>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" title="Notifications">🔔<span class="dot"></span></button>
+          <button class="primary" id="addBtn">+ Add task</button>
+        </div>
+      </header>
+
+      <section id="dashboard" class="view active-view">
+        <div class="hero">
+          <div>
+            <span class="pill">AI DAILY BRIEF</span>
+            <h2>Your day, simplified.</h2>
+            <p id="aiBrief">You have 6 tasks today. Finish the Python quiz first, then use your free 45-minute block for T&IA.</p>
+            <button class="ai-button" id="planBtn">✦ Generate my best study plan</button>
+          </div>
+          <div class="orb"><span>72%</span><small>focus score</small></div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><span>🔥</span><div><b id="streak">7</b><small>day streak</small></div></div>
+          <div class="stat"><span>✓</span><div><b id="doneCount">8</b><small>completed</small></div></div>
+          <div class="stat"><span>⏱</span><div><b>4.2h</b><small>focus time</small></div></div>
+          <div class="stat"><span>🎯</span><div><b>84%</b><small>on-time rate</small></div></div>
+        </div>
+
+        <div class="grid-two">
+          <div class="panel">
+            <div class="panel-head"><div><h3>Priority queue</h3><p>What deserves your attention now</p></div><button class="text-btn" data-view-target="tasks">View all →</button></div>
+            <div id="priorityList" class="task-list"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><h3>AI study plan</h3><p>Optimized around your deadlines</p></div><span class="ai-tag">AI</span></div>
+            <div class="timeline">
+              <div><i>17:30</i><div><b>Python — Quiz revision</b><small>35 min · High focus</small></div></div>
+              <div><i>18:10</i><div><b>Break + water</b><small>10 min · Reset</small></div></div>
+              <div><i>18:20</i><div><b>T&IA — Assignment</b><small>45 min · Deep work</small></div></div>
+              <div><i>19:05</i><div><b>Review + submit</b><small>15 min · Quick win</small></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel insight">
+          <span class="insight-icon">🧠</span>
+          <div><b>Smart insight</b><p>Your completion rate is highest between 5:00–7:00 PM. FocusFlow scheduled your hardest task inside that window.</p></div>
+          <span class="confidence">92% confidence</span>
+        </div>
+      </section>
+
+      <section id="tasks" class="view">
+        <div class="section-title"><div><span class="pill">TASK CENTER</span><h2>Everything you need to finish.</h2></div><button class="primary" id="addBtn2">+ New task</button></div>
+        <div class="filters"><button class="filter active">All</button><button class="filter">Today</button><button class="filter">High priority</button><button class="filter">Completed</button></div>
+        <div class="panel"><div id="allTasks" class="task-list large"></div></div>
+      </section>
+
+      <section id="planner" class="view">
+        <div class="section-title"><div><span class="pill">AI PLANNER</span><h2>Tell us what you need to finish.</h2><p>FocusFlow turns deadlines + available time into a realistic plan.</p></div></div>
+        <div class="planner-grid">
+          <div class="panel planner-form">
+            <label>What are you working on?</label>
+            <textarea id="goal" placeholder="Example: Finish my Python mini project and revise binary arithmetic before Tuesday..."></textarea>
+            <label>Available time today</label>
+            <input id="hours" type="range" min="1" max="6" value="3"><b><span id="hoursValue">3</span> hours</b>
+            <label>Energy level</label>
+            <div class="energy"><button class="energy-btn">😴 Low</button><button class="energy-btn active">🙂 Normal</button><button class="energy-btn">⚡ High</button></div>
+            <button class="primary wide" id="generatePlan">✦ Build my plan</button>
+          </div>
+          <div class="panel generated">
+            <div class="panel-head"><div><h3>AI recommendation</h3><p id="planStatus">Ready when you are.</p></div><span class="ai-tag">AI</span></div>
+            <div id="generatedPlan" class="empty-state">Your personalized schedule will appear here.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="analytics" class="view">
+        <div class="section-title"><div><span class="pill">PROGRESS</span><h2>Your academic momentum.</h2></div></div>
+        <div class="stats"><div class="stat"><span>📈</span><div><b>84%</b><small>on-time completion</small></div></div><div class="stat"><span>🎯</span><div><b>24.5h</b><small>focus this week</small></div></div><div class="stat"><span>🏆</span><div><b>1,240</b><small>focus points</small></div></div></div>
+        <div class="grid-two">
+          <div class="panel"><div class="panel-head"><div><h3>Weekly focus</h3><p>Deep-work minutes</p></div></div><div class="bars"><i style="height:48%"><span>Mon</span></i><i style="height:72%"><span>Tue</span></i><i style="height:55%"><span>Wed</span></i><i style="height:82%"><span>Thu</span></i><i style="height:68%"><span>Fri</span></i><i style="height:91%"><span>Sat</span></i><i style="height:35%"><span>Sun</span></i></div></div>
+          <div class="panel"><div class="panel-head"><div><h3>Subject balance</h3><p>Where your time goes</p></div></div><div class="subject"><span>Python</span><div><i style="width:82%"></i></div><b>82%</b></div><div class="subject"><span>T&IA</span><div><i style="width:64%"></i></div><b>64%</b></div><div class="subject"><span>Maths</span><div><i style="width:48%"></i></div><b>48%</b></div><div class="subject"><span>EG</span><div><i style="width:38%"></i></div><b>38%</b></div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="taskModal">
+    <div class="modal-card"><button class="close" id="closeModal">×</button><span class="pill">NEW TASK</span><h2>Add a task</h2>
+      <label>Task name</label><input id="taskName" placeholder="e.g. Python assignment">
+      <label>Subject</label><input id="taskSubject" placeholder="e.g. Python">
+      <label>Deadline</label><input id="taskDeadline" type="datetime-local">
+      <label>Priority</label><select id="taskPriority"><option>High</option><option>Medium</option><option>Low</option></select>
+      <button class="primary wide" id="saveTask">Add to FocusFlow</button>
+    </div>
+  </div>
+  <div class="toast" id="toast">✨ AI plan updated</div>
+<script src="script.js"></script>
+</body>
+</html>
